@@ -1,4 +1,4 @@
-# exercice-SQL
+﻿# exercice-SQL
 
 ###Exercice 1 = weather-app
 ###Exercice 2 = petits exercices / Drill d'initiation au SQL
