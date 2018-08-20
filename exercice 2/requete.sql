@@ -1,0 +1,11 @@
+SELECT students.*,school.* FROM students,school;
+SELECT prenom FROM students;
+SELECT students.prenom, students.datenaissance,school.school FROM students,school ;
+SELECT nom, prenom FROM students WHERE genre="F";
+SELECT nom, prenom FROM students WHERE school.school="Charleroi";
+SELECT prenom FROM students ORDER BY prenom DESC;
+SELECT prenom FROM students ORDER BY prenom DESC LIMIT 2;
+INSERT INTO students (nom, prenom, datenaissance, genre, school) VALUES ('Dalor', 'Ginette', '1930-01-01','F',2);
+UPDATE students SET genre='M', prenom='Omer' WHERE prenom='Ginette';
+DELETE FROM students WHERE school.idschool=3;
+ALTER TABLE students MODIFY school varchar(10); UPDATE students SET school='Bruxelles' WHERE school ='1'; UPDATE students SET school='Charleroi' WHERE school = '2';
