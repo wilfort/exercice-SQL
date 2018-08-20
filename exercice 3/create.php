@@ -3,26 +3,45 @@ $message="";
 if(isset($_POST['button'])){
 		try
 			{
-				// On se connecte à MySQL
-				$bdd = new PDO('mysql:host=localhost;dbname=reunion_island;charset=utf8', 'root', 'PRli1992');
-
-				$stmt = $bdd->prepare("INSERT INTO hiking (name, difficulty, distance, duration, height_difference, available) VALUES (:nom,:niveau,:dist,:temps,:devi,:avail)");
-				$stmt->bindParam(":nom", $name);
-				$stmt->bindParam(":niveau", $difficulty);
-				$stmt->bindParam(":dist", $distance);
-				$stmt->bindParam(":temps", $duration);
-				$stmt->bindParam(":devi", $height_difference);
-				$stmt->bindParam(":avail", $available);
-				$name = $_POST['name'];
+				$errors = array();
+				$name = filter_var($_POST['name'],FILTER_SANITIZE_STRING);
+				$available = filter_var($_POST['available'],FILTER_SANITIZE_STRING);
 				$difficulty = $_POST['difficulty'];
-				$distance = $_POST['distance'];
-				$duration = $_POST['duration'];
-				$available = $_POST['available'];
-
-				$stmt->execute();
-				$message="La randonnée a été ajoutée avec succès.";
-				$stmt->closeCursor();
+				$duration = filter_var($_POST['duration'],FILTER_SANITIZE_STRING);
+				$distance =filter_var($_POST['distance'],FILTER_SANITIZE_NUMBER_INT);
+				$height_difference =filter_var($_POST['height_difference'],FILTER_SANITIZE_NUMBER_INT);
+				if (empty($name)==true) {
+					$errors['name'] =  "Cette name est invalide.";
+	//				$errorEmail="<span class='erreur'>Cette distance est invalide.</span>";
+				}
 				
+				if (empty($duration)==true) {
+					$errors['duration'] =  "Cette duration est invalide.";
+	//				$errorEmail="<span class='erreur'>Cette distance est invalide.</span>";
+				}
+				if (empty($distance)==true) {
+					$errors['distance'] =  "Cette distance est invalide.";
+	//				$errorEmail="<span class='erreur'>Cette distance est invalide.</span>";
+				}
+				if ((false === filter_var($height_difference, FILTER_VALIDATE_INT)) OR (empty($height_difference)==true)) {
+					$errors['height_difference'] =  "Cette height difference est invalide.";
+	//				$errorEmail="<span class='erreur'>Cette height difference est invalide.</span>";
+				}
+				if (count($errors)=== 0){
+					// On se connecte à MySQL
+					$sql="INSERT INTO hiking (name, difficulty, distance, duration, height_difference, available) VALUES (:nom,:niveau,:dist,:temps,:devi,:avail)";
+					include('./php-pdo/connect.php');
+    				
+					$requete->bindParam(":nom", $name);
+					$requete->bindParam(":niveau", $difficulty);
+					$requete->bindParam(":dist", $distance);
+					$requete->bindParam(":temps", $duration);
+					$requete->bindParam(":devi", $height_difference);
+					$requete->bindParam(":avail", $available);				
+					$requete->execute();
+					$message="La randonnée a été ajoutée avec succès.";
+					$requete->closeCursor();
+				}
 			}
 		catch(Exception $e)
 			{
@@ -40,7 +59,7 @@ if(isset($_POST['button'])){
 	<link rel="stylesheet" href="css/basics.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-	<a href="./php-pdo/read.php">Liste des données</a>
+	<a href="./index.php">Liste des données</a>
 	<h1>Ajouter</h1>
 	<form action="#" method="post">
 		<div>

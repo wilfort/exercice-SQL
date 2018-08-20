@@ -3,10 +3,12 @@
 try
   {
     // On se connecte à MySQL
-      $bdd = new PDO('mysql:host=localhost;dbname=reunion_island;charset=utf8', 'root', 'PRli1992');
-      $resultat = $bdd->prepare('SELECT * FROM hiking');
-      $resultat->execute();
-      $donnees = $resultat->fetchAll();
+      // include('./php-pdo/connect.php');
+      $sql="SELECT * FROM hiking";
+      include('./php-pdo/connect.php');
+      
+      $requete->execute();
+      $donnees = $requete->fetchAll();
       
   }
 catch(Exception $e)
@@ -21,7 +23,7 @@ catch(Exception $e)
   <head>
     <meta charset="utf-8">
     <title>Randonnées</title>
-    <link rel="stylesheet" href="../css/basics.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./css/basics.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
     <h1>Liste des randonnées</h1>
@@ -45,12 +47,12 @@ foreach ($donnees as $key => $value) {
         <td>".$value['duration']."</td>
         <td>".$value['height_difference']." m</td>
         <td>".$value['available']."</td>
-        <td><a href=\"../update.php?id='".$value['id']."'\">upload</a></td>
-        <td><form action='../delete.php' method='post'><input class=\"invisible\" type='number' name='id' value='".$value['id']."'><button type='submit' name='delete'>delete</button></form></td>
+        <td><a href=\"./update.php?id='".$value['id']."'\">upload</a></td>
+        <td><form action='./delete.php' method='post'><input class=\"invisible\" type='number' name='id' value='".$value['id']."'><button type='submit' name='delete'>delete</button></form></td>
         </tr>" ;
       }?>
-      
+      <?php $requete->closeCursor(); ?>
     </table>
-    <a href="../create.php">Crée une donnée</a>
+    <a href="./create.php">Crée une donnée</a>
   </body>
 </html>
