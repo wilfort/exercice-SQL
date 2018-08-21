@@ -7,17 +7,18 @@
   </head>
   <body>
 
-    <form action="" method="post">
+    <form action="./check_login.php" method="post">
       <div>
-        <label for="username">Identifiant</label>
-        <input type="text" name="username">
+        <label for="login">Identifiant</label>
+        <input type="text" name="login">
       </div>
       <div>
-        <label for="password">Mot de passe </label>
-        <input type="password" name="password">
+        <label for="pwd">Mot de passe </label>
+        <input type="password" name="pwd">
       </div>
       <div>
-        <button type="button" name="button">Se connecter</button>
+      <input class="invisible" type="text" name="php" value=<?=$_POST['php']?>>
+        <button type="submit" name="button">Se connecter</button>
       </div>
     </form>
   </body>
