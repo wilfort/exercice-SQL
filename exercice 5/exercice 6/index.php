@@ -1,5 +1,5 @@
 <?php
-$sql="SELECT * FROM clients";
+$sql="SELECT title, performer, date, startTime FROM shows order by title asc";
 
 include('./php-pdo/connect.php');
 
@@ -16,25 +16,9 @@ $exercice1 = $requete->fetchAll();
     <title>Document</title>
 </head>
 <body>
-    <table>
-    <tr>
-        <th>id</th>
-        <th>lastName</th>
-        <th>firstName</th>
-        <th>birthDate</th>
-        <th>card</th>
-        <th>cardNumber</th>
-    </tr>
     <?php
     foreach ($exercice1 as $key => $value) {?>
-    <tr>
-        <td><?=$value['id']?></td>
-        <td><?=$value['lastName']?></td>
-        <td><?=$value['firstName']?></td>
-        <td><?=$value['birthDate']?></td>
-        <td><?=$value['card']?></td>
-        <td><?=$value['cardNumber']?></td>
-    </tr>
+        <?=$value['title']?> par <?=$value['performer']?>, le <?=$value['date']?> à <?=$value['startTime']?>.<br>
 <?php
     }
     ?>

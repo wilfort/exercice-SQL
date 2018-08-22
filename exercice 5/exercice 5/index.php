@@ -1,5 +1,5 @@
 <?php
-$sql="SELECT * FROM clients";
+$sql="SELECT lastName,firstName FROM clients where lastName like 'M%' order by lastName asc";
 
 include('./php-pdo/connect.php');
 
@@ -16,28 +16,15 @@ $exercice1 = $requete->fetchAll();
     <title>Document</title>
 </head>
 <body>
-    <table>
-    <tr>
-        <th>id</th>
-        <th>lastName</th>
-        <th>firstName</th>
-        <th>birthDate</th>
-        <th>card</th>
-        <th>cardNumber</th>
-    </tr>
     <?php
     foreach ($exercice1 as $key => $value) {?>
-    <tr>
-        <td><?=$value['id']?></td>
-        <td><?=$value['lastName']?></td>
-        <td><?=$value['firstName']?></td>
-        <td><?=$value['birthDate']?></td>
-        <td><?=$value['card']?></td>
-        <td><?=$value['cardNumber']?></td>
-    </tr>
+
+        
+        Nom : <?=$value['lastName']?><br>
+        Prénom : <?=$value['firstName']?><br><br>
+
 <?php
     }
     ?>
-    </table>
 </body>
 </html>

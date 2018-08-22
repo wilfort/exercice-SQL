@@ -17,23 +17,14 @@ $exercice1 = $requete->fetchAll();
 </head>
 <body>
     <table>
-    <tr>
-        <th>id</th>
-        <th>lastName</th>
-        <th>firstName</th>
-        <th>birthDate</th>
-        <th>card</th>
-        <th>cardNumber</th>
-    </tr>
     <?php
     foreach ($exercice1 as $key => $value) {?>
     <tr>
-        <td><?=$value['id']?></td>
-        <td><?=$value['lastName']?></td>
-        <td><?=$value['firstName']?></td>
-        <td><?=$value['birthDate']?></td>
-        <td><?=$value['card']?></td>
-        <td><?=$value['cardNumber']?></td>
+
+        Nom : <?=$value['lastName']?><br>
+        Prénom : <?=$value['firstName']?><br>
+        Date de naissance : <?=$value['birthDate']?><br>
+        Carte de fidélité : <?php if($value['card']){echo "Oui<br>Numéro de carte : ".$value['cardNumber']."<br>";}else{echo "Non<br>";}?><br>
     </tr>
 <?php
     }

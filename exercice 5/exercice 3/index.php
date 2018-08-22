@@ -1,5 +1,5 @@
 <?php
-$sql="SELECT * FROM clients";
+$sql="SELECT * FROM clients limit 20";
 
 include('./php-pdo/connect.php');
 

@@ -1,5 +1,5 @@
 <?php
-$sql="SELECT type FROM showTypes";
+$sql="SELECT showTypes.type as type,genres.genre as genre FROM showTypes LEFT OUTER JOIN genres ON genres.showTypesId=showTypes.id";
 
 include('./php-pdo/connect.php');
 
@@ -19,12 +19,13 @@ $exercice1 = $requete->fetchAll();
     <table>
     <tr>
         <th>type</th>
-        
+        <th>genre</th>
     </tr>
     <?php
     foreach ($exercice1 as $key => $value) {?>
     <tr>
         <td><?=$value['type']?></td>
+        <td><?=$value['genre']?></td>
     </tr>
 <?php
     }

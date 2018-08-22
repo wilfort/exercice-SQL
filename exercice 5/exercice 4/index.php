@@ -1,5 +1,5 @@
 <?php
-$sql="SELECT * FROM clients";
+$sql="SELECT * FROM clients where card=1";
 
 include('./php-pdo/connect.php');
 
